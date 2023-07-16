@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하잔어 발음 변환</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>하잔어 발음 변환</h1>
+        <label for="inputText">하잔어를 입력하세요:</label>
+        <textarea id="inputText" rows="5" placeholder="텍스트를 입력하세요..." oninput="convertText()"></textarea>
+
+        <div class="result-section">
+            <div class="result-box">
+                <h2>IPA</h2>
+                <textarea id="ipaResult" readonly></textarea>
+            </div>
+            <div class="result-box">
+                <h2>한글</h2>
+                <textarea id="hangulResult" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
