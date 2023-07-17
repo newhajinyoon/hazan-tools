@@ -36,7 +36,7 @@ function convertText() {
         'o': 'ɔ',
         'u': 'u',
         'p': 'p',
-        'μ': 'n',
+        'μ': 'nu',
         's': 's',
         'x': 'ʃi',
         'g': 'gi',
