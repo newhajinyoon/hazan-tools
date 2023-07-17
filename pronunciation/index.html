@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하잔어 발음 변환</title>
+    <title>하잔어 변환</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>하잔어 발음 변환</h1>
+        <h1>하잔어 변환</h1>
         <label for="inputText">하잔어를 입력하세요:</label>
         <textarea id="inputText" rows="5" placeholder="텍스트를 입력하세요..." oninput="convertText()"></textarea>
 
@@ -20,6 +20,10 @@
             <div class="result-box">
                 <h2>한글</h2>
                 <textarea id="hangulResult" readonly></textarea>
+            </div>
+            <div class="result-box">
+                <h2>로마자 (정확하지 않음)</h2>
+                <textarea id="romanizedResult" readonly></textarea>
             </div>
         </div>
     </div>
