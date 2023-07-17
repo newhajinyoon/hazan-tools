@@ -11331,6 +11331,7 @@ function convertText() {
     convertedTextHangul = replaceAll(convertedTextHangul, "르우", "루");
     convertedTextHangul = replaceAll(convertedTextHangul, "기키", "깈");
     convertedTextHangul = replaceAll(convertedTextHangul, "어아", "어아");
+    convertedTextHangul = replaceAll(convertedTextHangul, "키기", "킥");
 
     convertedTextHangul = replaceAll(convertedTextHangul, "으와", "으와");
     convertedTextHangul = replaceAll(convertedTextHangul, "크와", "콰");
