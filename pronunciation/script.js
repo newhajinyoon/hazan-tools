@@ -26,6 +26,7 @@ function convertText() {
         'ώ': '위',
         'h': 'ㅎ',
         'ʒ': '스'
+        'm': '므'
     };
 
     const ipaConversionTable = {
@@ -51,6 +52,7 @@ function convertText() {
         'h': 'h',
         'ώ': 'we',
         'ʒ': 'su'
+        'ʒ': 'm'
     };
 
 
