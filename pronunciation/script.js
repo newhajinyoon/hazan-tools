@@ -26,7 +26,9 @@ function convertText() {
         'ώ': '위',
         'h': 'ㅎ',
         'ʒ': '스',
-        'm': '므'
+        'm': '므',
+        'ê': '에',
+        't': '트'
     };
 
     const ipaConversionTable = {
@@ -52,7 +54,9 @@ function convertText() {
         'h': 'h',
         'ώ': 'we',
         'ʒ': 'su',
-        'm': 'm'
+        'm': 'm',
+        'ê': 'e',
+        't': 't'
     };
 
 
@@ -11323,9 +11327,12 @@ function convertText() {
     convertedTextIPA = replaceAll(convertedTextIPA, "kiki", "ku");
     convertedTextIPA = replaceAll(convertedTextIPA, "av", "ap");
     convertedTextIPA = replaceAll(convertedTextIPA, "giki", "gik");
+    convertedTextIPA = replaceAll(convertedTextIPA, "kigi", "kik");
+    convertedTextIPA = replaceAll(convertedTextIPA, "ɔə", "o");
+
     convertedTextIPA = replaceAll(convertedTextIPA, "zwoaː", "ʒawaː");
 
-    convertedTextHangul = replaceAll(convertedTextHangul, "키키", "쿠");
+    convertedTextHangul = replaceAll(convertedTextHangul, "키키", "크");
     convertedTextHangul = replaceAll(convertedTextHangul, "와아", "와");
     convertedTextHangul = replaceAll(convertedTextHangul, "누와", "놔");
     convertedTextHangul = replaceAll(convertedTextHangul, "아브", "압");
@@ -11333,6 +11340,9 @@ function convertText() {
     convertedTextHangul = replaceAll(convertedTextHangul, "기키", "깈");
     convertedTextHangul = replaceAll(convertedTextHangul, "어아", "어아");
     convertedTextHangul = replaceAll(convertedTextHangul, "키기", "킥");
+    convertedTextHangul = replaceAll(convertedTextHangul, "프크아", "카");
+    convertedTextHangul = replaceAll(convertedTextHangul, "우우", "유");
+    convertedTextHangul = replaceAll(convertedTextHangul, "어으", "오");
 
     convertedTextHangul = replaceAll(convertedTextHangul, "으와", "으와");
     convertedTextHangul = replaceAll(convertedTextHangul, "크와", "콰");
