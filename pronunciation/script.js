@@ -10,7 +10,6 @@ function convertText() {
         'è': '으',
         'o': '어',
         'u': '우',
-        'μ': '누',
         's': '스',
         'x': '시',
         'g': '기',
@@ -23,12 +22,12 @@ function convertText() {
         'p': '프',
         'q': '크',
         'f': '포',
-        'ώ': '위',
         'h': 'ㅎ',
-        'ʒ': '스',
         'm': '므',
         'ê': '에',
-        't': '트'
+        't': '트',
+        'n': '누',   
+        'd': '드'   
     };
 
     const ipaConversionTable = {
@@ -38,7 +37,7 @@ function convertText() {
         'o': 'ɔ',
         'u': 'u',
         'p': 'p',
-        'μ': 'nu',
+        'n': 'nu',
         's': 's',
         'x': 'ʃi',
         'g': 'gi',
@@ -52,8 +51,6 @@ function convertText() {
         'q': 'k',
         'f': 'fo',
         'h': 'h',
-        'ώ': 'we',
-        'ʒ': 'su',
         'm': 'm',
         'ê': 'e',
         't': 't'
@@ -11326,8 +11323,8 @@ function convertText() {
     // Perform the specific replacements using replaceAll function
     convertedTextIPA = replaceAll(convertedTextIPA, "kiki", "ku");
     convertedTextIPA = replaceAll(convertedTextIPA, "av", "ap");
-    convertedTextIPA = replaceAll(convertedTextIPA, "giki", "gik");
-    convertedTextIPA = replaceAll(convertedTextIPA, "kigi", "kik");
+    // convertedTextIPA = replaceAll(convertedTextIPA, "giki", "gik");
+    // convertedTextIPA = replaceAll(convertedTextIPA, "kigi", "kik");
     convertedTextIPA = replaceAll(convertedTextIPA, "ɔə", "o");
 
     convertedTextIPA = replaceAll(convertedTextIPA, "zwoaː", "ʒawaː");
@@ -11337,9 +11334,9 @@ function convertText() {
     convertedTextHangul = replaceAll(convertedTextHangul, "누와", "놔");
     convertedTextHangul = replaceAll(convertedTextHangul, "아브", "압");
     convertedTextHangul = replaceAll(convertedTextHangul, "르우", "루");
-    convertedTextHangul = replaceAll(convertedTextHangul, "기키", "깈");
+    // convertedTextHangul = replaceAll(convertedTextHangul, "기키", "깈");
     convertedTextHangul = replaceAll(convertedTextHangul, "어아", "어아");
-    convertedTextHangul = replaceAll(convertedTextHangul, "키기", "킥");
+    // convertedTextHangul = replaceAll(convertedTextHangul, "키기", "킥");
     convertedTextHangul = replaceAll(convertedTextHangul, "프크아", "카");
     convertedTextHangul = replaceAll(convertedTextHangul, "우우", "유");
     convertedTextHangul = replaceAll(convertedTextHangul, "어으", "오");
@@ -11351,6 +11348,7 @@ function convertText() {
     convertedTextHangul = replaceAll(convertedTextHangul, "스와", "솨");
     convertedTextHangul = replaceAll(convertedTextHangul, "르와", "롸");
     convertedTextHangul = replaceAll(convertedTextHangul, "브와", "봐");
+    convertedTextHangul = replaceAll(convertedTextHangul, "프와", "퐈");
 
     // Convert convertedTextHangul to Romanized
     for (let char of convertedTextHangul) {
