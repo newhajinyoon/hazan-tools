@@ -48,6 +48,20 @@
             font-size: 35px;
             font-weight: bold;
         }
+        #copyButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        #copyButton:hover {
+            background-color: #0056b3;
+        }
         @media (max-width: 600px) {
             #textInput {
                 width: 90%;
@@ -59,6 +73,7 @@
     <h1>로마자 -> 하잔어 고유 문자 변환기</h1>
     <textarea id="textInput" placeholder="텍스트를 입력하세요..." oninput="displayImages()"></textarea>
     <div id="imageDisplay"></div>
+    <button id="copyButton" onclick="copyTransformedText()">폰트용 복사</button>
 
     <script>
         function displayImages() {
@@ -124,6 +139,17 @@
                 }
                 imageDisplay.appendChild(lineContainer);
             }
+        }
+
+        function copyTransformedText() {
+            const transformedText = document.getElementById('imageDisplay').innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = transformedText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('폰트용 텍스트가 복사되었습니다!');
         }
     </script>
 </body>
