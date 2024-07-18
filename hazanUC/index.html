@@ -36,6 +36,7 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
+            margin-bottom: 20px;
         }
         #imageDisplay img, #imageDisplay span {
             margin: 2px;
@@ -49,23 +50,13 @@
             font-weight: bold;
         }
         #copyButton {
-            margin-top: 20px;
             padding: 10px 20px;
-            background-color: #007bff;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-        #copyButton:hover {
-            background-color: #0056b3;
-        }
-        @media (max-width: 600px) {
-            #textInput {
-                width: 90%;
-            }
         }
     </style>
 </head>
@@ -73,7 +64,7 @@
     <h1>로마자 -> 하잔어 고유 문자 변환기</h1>
     <textarea id="textInput" placeholder="텍스트를 입력하세요..." oninput="displayImages()"></textarea>
     <div id="imageDisplay"></div>
-    <button id="copyButton" onclick="copyTransformedText()">폰트용 복사</button>
+    <button id="copyButton" onclick="convertAndCopy()">폰트용 복사</button>
 
     <script>
         function displayImages() {
@@ -81,75 +72,107 @@
             const imageDisplay = document.getElementById('imageDisplay');
             imageDisplay.innerHTML = '';
 
-            const combinations = {
-                'av': 'av.png',
-                'oè': 'oè.png',
-                'pqa': 'pqa.png',
-                'lu': 'lu.png',
-                'uu': 'uu.png'
+            const romanToHazan = {
+                'a': '𮯰',
+                'e': '𮯱',
+                'è': '𮯲',
+                'o': '𮯳',
+                'u': '𮯴',
+                'p': '𮯵',
+                'n': '𮯶',
+                's': '𮯷',
+                'x': '𮯸',
+                'g': '𮯹',
+                'k': '𮯺',
+                'l': '𮯻',
+                'w': '𮯼',
+                'v': '𮯽',
+                'z': '𮯾',
+                'j': '𮯿',
+                'q': '𮰀',
+                'f': '𮰁',
+                't': '𮰂',
+                'h': '𮰃',
+                'm': '𮰄',
+                'd': '𮰅',
+                'ê': '𮰆',
+                'uu': '𮰇',
+                'av': '𮰈',
+                'lu': '𮰉',
+                'pqa': '𮰊',
+                'oè': '𮰋',
+                ' ': '𮰌' // Space character
             };
-
-            const allowedCharacters = new Set(['a', 'e', 'è', 'ê', 'o', 'u', 'p', 'n', 's', 'x', 'g', 'k', 'l', 'w', 'v', 'z', 'j', 'q', 'f', 't', 'h', 'm', 'd', ' ']);
 
             let lines = text.split('\n');
 
             for (let line of lines) {
                 let lineContainer = document.createElement('div');
-                let i = 0;
-                while (i < line.length) {
-                    let foundCombination = false;
-
-                    for (let len = 3; len >= 2; len--) {
-                        const substring = line.substring(i, i + len);
-                        if (combinations[substring]) {
-                            const img = document.createElement('img');
-                            img.src = `images/${combinations[substring]}`;
-                            img.alt = substring;
-                            lineContainer.appendChild(img);
-                            i += len;
-                            foundCombination = true;
-                            break;
-                        }
-                    }
-
-                    if (!foundCombination) {
-                        const char = line[i].toLowerCase();
-                        if (allowedCharacters.has(char)) {
-                            if (char === ' ') {
-                                const img = document.createElement('img');
-                                img.src = `images/sp.png`;
-                                img.alt = ' ';
-                                lineContainer.appendChild(img);
-                            } else {
-                                const img = document.createElement('img');
-                                img.src = `images/${char}.png`;
-                                img.alt = char;
-                                img.onerror = function() {
-                                    this.style.display = 'none';
-                                };
-                                lineContainer.appendChild(img);
-                            }
-                        } else {
-                            const span = document.createElement('span');
-                            span.textContent = char;
-                            lineContainer.appendChild(span);
-                        }
-                        i++;
+                for (let char of line) {
+                    if (char.toLowerCase() in romanToHazan) {
+                        const span = document.createElement('span');
+                        span.textContent = romanToHazan[char.toLowerCase()];
+                        lineContainer.appendChild(span);
+                    } else {
+                        const span = document.createElement('span');
+                        span.textContent = char; // Preserve non-replaced characters
+                        lineContainer.appendChild(span);
                     }
                 }
                 imageDisplay.appendChild(lineContainer);
             }
         }
 
-        function copyTransformedText() {
-            const transformedText = document.getElementById('imageDisplay').innerText;
-            const textarea = document.createElement('textarea');
-            textarea.value = transformedText;
-            document.body.appendChild(textarea);
-            textarea.select();
+        function convertAndCopy() {
+            const textToConvert = document.getElementById('textInput').value;
+            const romanToHazan = {
+                'a': '𮯰',
+                'e': '𮯱',
+                'è': '𮯲',
+                'o': '𮯳',
+                'u': '𮯴',
+                'p': '𮯵',
+                'n': '𮯶',
+                's': '𮯷',
+                'x': '𮯸',
+                'g': '𮯹',
+                'k': '𮯺',
+                'l': '𮯻',
+                'w': '𮯼',
+                'v': '𮯽',
+                'z': '𮯾',
+                'j': '𮯿',
+                'q': '𮰀',
+                'f': '𮰁',
+                't': '𮰂',
+                'h': '𮰃',
+                'm': '𮰄',
+                'd': '𮰅',
+                'ê': '𮰆',
+                'uu': '𮰇',
+                'av': '𮰈',
+                'lu': '𮰉',
+                'pqa': '𮰊',
+                'oè': '𮰋',
+                ' ': '𮰌' // Space character
+            };
+
+            let convertedText = '';
+            for (let char of textToConvert) {
+                if (char.toLowerCase() in romanToHazan) {
+                    convertedText += romanToHazan[char.toLowerCase()];
+                } else {
+                    convertedText += char; // Preserve non-replaced characters
+                }
+            }
+
+            const dummyTextarea = document.createElement('textarea');
+            document.body.appendChild(dummyTextarea);
+            dummyTextarea.value = convertedText;
+            dummyTextarea.select();
             document.execCommand('copy');
-            document.body.removeChild(textarea);
-            alert('폰트용 텍스트가 복사되었습니다!');
+            document.body.removeChild(dummyTextarea);
+            alert('변환된 텍스트가 복사되었습니다!');
         }
     </script>
 </body>
