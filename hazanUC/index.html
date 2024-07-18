@@ -53,10 +53,14 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #4CAF50;
+            background-color: #007bff; /* Blue color */
             color: white;
             border: none;
             border-radius: 5px;
+            margin-top: 10px;
+        }
+        #copyButton:hover {
+            background-color: #0056b3; /* Darker blue on hover */
         }
     </style>
 </head>
@@ -72,51 +76,60 @@
             const imageDisplay = document.getElementById('imageDisplay');
             imageDisplay.innerHTML = '';
 
-            const romanToHazan = {
-                'a': '𮯰',
-                'e': '𮯱',
-                'è': '𮯲',
-                'o': '𮯳',
-                'u': '𮯴',
-                'p': '𮯵',
-                'n': '𮯶',
-                's': '𮯷',
-                'x': '𮯸',
-                'g': '𮯹',
-                'k': '𮯺',
-                'l': '𮯻',
-                'w': '𮯼',
-                'v': '𮯽',
-                'z': '𮯾',
-                'j': '𮯿',
-                'q': '𮰀',
-                'f': '𮰁',
-                't': '𮰂',
-                'h': '𮰃',
-                'm': '𮰄',
-                'd': '𮰅',
-                'ê': '𮰆',
-                'uu': '𮰇',
-                'av': '𮰈',
-                'lu': '𮰉',
-                'pqa': '𮰊',
-                'oè': '𮰋',
-                ' ': '𮰌' // Space character
+            const combinations = {
+                'av': 'av.png',
+                'oè': 'oè.png',
+                'pqa': 'pqa.png',
+                'lu': 'lu.png',
+                'uu': 'uu.png'
             };
+
+            const allowedCharacters = new Set(['a', 'e', 'è', 'ê', 'o', 'u', 'p', 'n', 's', 'x', 'g', 'k', 'l', 'w', 'v', 'z', 'j', 'q', 'f', 't', 'h', 'm', 'd', ' ']);
 
             let lines = text.split('\n');
 
             for (let line of lines) {
                 let lineContainer = document.createElement('div');
-                for (let char of line) {
-                    if (char.toLowerCase() in romanToHazan) {
-                        const span = document.createElement('span');
-                        span.textContent = romanToHazan[char.toLowerCase()];
-                        lineContainer.appendChild(span);
-                    } else {
-                        const span = document.createElement('span');
-                        span.textContent = char; // Preserve non-replaced characters
-                        lineContainer.appendChild(span);
+                let i = 0;
+                while (i < line.length) {
+                    let foundCombination = false;
+
+                    for (let len = 3; len >= 2; len--) {
+                        const substring = line.substring(i, i + len);
+                        if (combinations[substring]) {
+                            const img = document.createElement('img');
+                            img.src = `images/${combinations[substring]}`;
+                            img.alt = substring;
+                            lineContainer.appendChild(img);
+                            i += len;
+                            foundCombination = true;
+                            break;
+                        }
+                    }
+
+                    if (!foundCombination) {
+                        const char = line[i].toLowerCase();
+                        if (allowedCharacters.has(char)) {
+                            if (char === ' ') {
+                                const img = document.createElement('img');
+                                img.src = `images/sp.png`;
+                                img.alt = ' ';
+                                lineContainer.appendChild(img);
+                            } else {
+                                const img = document.createElement('img');
+                                img.src = `images/${char}.png`;
+                                img.alt = char;
+                                img.onerror = function() {
+                                    this.style.display = 'none';
+                                };
+                                lineContainer.appendChild(img);
+                            }
+                        } else {
+                            const span = document.createElement('span');
+                            span.textContent = char;
+                            lineContainer.appendChild(span);
+                        }
+                        i++;
                     }
                 }
                 imageDisplay.appendChild(lineContainer);
@@ -154,7 +167,6 @@
                 'lu': '𮰉',
                 'pqa': '𮰊',
                 'oè': '𮰋',
-                ' ': '𮰌' // Space character
             };
 
             let convertedText = '';
