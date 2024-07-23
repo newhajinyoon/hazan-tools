@@ -49,7 +49,7 @@
             font-size: 35px;
             font-weight: bold;
         }
-        #copyButton {
+        #copyButton, #similarCopyButton {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
@@ -59,7 +59,7 @@
             border-radius: 5px;
             margin-top: 10px;
         }
-        #copyButton:hover {
+        #copyButton:hover, #similarCopyButton:hover {
             background-color: #0056b3; /* Darker blue on hover */
         }
     </style>
@@ -69,6 +69,7 @@
     <textarea id="textInput" placeholder="텍스트를 입력하세요..." oninput="displayImages()"></textarea>
     <div id="imageDisplay"></div>
     <button id="copyButton" onclick="convertAndCopy()">폰트용 복사</button>
+    <button id="similarCopyButton" onclick="convertAndCopySimilar()">비슷한 문자로 복사</button>
 
     <script>
         function displayImages() {
@@ -167,6 +168,7 @@
                 'lu': '𮰉',
                 'pqa': '𮰊',
                 'oè': '𮰋',
+                ' ': '𮰌' // Space character
             };
 
             let convertedText = '';
@@ -178,9 +180,72 @@
                 }
             }
 
+            copyToClipboard(convertedText);
+        }
+
+        function convertAndCopySimilar() {
+            const textToConvert = document.getElementById('textInput').value;
+            const romanToSimilar = {
+                'a': 'Ո',
+                'av': 'ⴴ',
+                'd': 'X',
+                'e': 'ᑐ',
+                'è': 'U',
+                'ê': 'ᗭ',
+                'f': '𝟴',
+                'g': 'Ꙅ',
+                'h': '߂',
+                'j': '⏃',
+                'k': 'Ѕ',
+                'l': 'Է',
+                'lu': 'Ϛ',
+                'm': 'ᒐ',
+                'n': 'ᕂ',
+                'o': 'ᑕ',
+                'oè': 'ᑯ',
+                'p': 'O',
+                'pqa': '⥾',
+                'q': 'ⵀ',
+                's': 'V',
+                't': 'ᑲ',
+                'u': '⟒',
+                'uu': 'ᗨ',
+                'v': 'Λ',
+                'w': 'ᗩ',
+                'x': '𝈷',
+                'z': '🜂',
+                ' ': ' ' // Space character
+            };
+
+            let convertedText = '';
+            for (let i = 0; i < textToConvert.length; i++) {
+                let char = textToConvert[i].toLowerCase();
+                let foundCombination = false;
+                for (let len = 3; len >= 2; len--) {
+                    const substring = textToConvert.substring(i, i + len).toLowerCase();
+                    if (romanToSimilar[substring]) {
+                        convertedText += romanToSimilar[substring];
+                        i += len - 1;
+                        foundCombination = true;
+                        break;
+                    }
+                }
+                if (!foundCombination) {
+                    if (char in romanToSimilar) {
+                        convertedText += romanToSimilar[char];
+                    } else {
+                        convertedText += char;
+                    }
+                }
+            }
+
+            copyToClipboard(convertedText);
+        }
+
+        function copyToClipboard(text) {
             const dummyTextarea = document.createElement('textarea');
             document.body.appendChild(dummyTextarea);
-            dummyTextarea.value = convertedText;
+            dummyTextarea.value = text;
             dummyTextarea.select();
             document.execCommand('copy');
             document.body.removeChild(dummyTextarea);
